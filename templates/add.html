@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}Home {% endblock title %}
+  {% block body %}
+      
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      
+
+      <a class="navbar-brand" href="/">Todo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+         
+        
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-dark" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+  <form action="/movies" method="POST">
+    
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"><h3>Movie Title</h3></label>
+        <!-- <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp"> -->
+      </div>
+
+      <div class="mb-3">
+        <label for="director" class="form-label"><h4>Director</h4></label>
+        <!-- <input type="text" class="form-control" name=" director" id=" director"> -->
+      </div>
+
+      <div class="mb-3">
+        <label for=" description" class="form-label"><h4>Movie Description</h4></label>
+        <input type="text" class="form-control" name=" description" id=" description">
+      </div>
+      <div class="mb-3">
+        <label for="year" class="form-label"><h4>Year</h4></label>
+        <input type="date" class="form-control" name="year" id="year">
+      </div>
+
+      <div class="mb-3">
+        <label for="rating" class="form-label"><h4>Rating</h4></label>
+        <!-- <input type="number" class="form-control" name=" rating" id=" rating"> -->
+      </div>
+
+      <button type="submit" class="btn btn-dark">Submit</button>
+    </form>
+    </div>
+    
+    <div class="container my-3">
+      <h1>My Todo</h1>
+      {% if allTodo|length == 0 %}
+      <div class="alert alert-dark" role="alert">
+        No Todo Available. Please Add Todo!
+        </div>        
+        {% else %}
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Title</th>
+              <th scope="col">Description</th>
+              <th scope="col">Time</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for todo in allTodo:%}
+            <tr>
+              <th scope="row">{{loop.index}}</th>
+              <td>{{todo.title}}</td>
+              <td>{{todo.description}}</td>
+              <td>{{todo.year}}</td>
+              <td>{{todo.rating}}</td>
+              <td>
+                
+                <a href="/update/{{todo.id}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Update</button>
+                <a href="/delete/{{todo.id}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Delete</button>
+              </td>
+                
+          
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+            
+            {% endif %}
+
+           
+            
+         
+    </div>
+    {% endblock body %}
